@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ksnow13/S3_FullStack_FinalSprint_Outline.git"
+    "url": "git+https://github.com/kchafe84/FullStack_FinalSprint_Semester3.git"
   },
   "author": "Ksnow13",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ksnow13/S3_FullStack_FinalSprint_Outline/issues"
+    "url": "https://github.com/kchafe84/FullStack_FinalSprint_Semester3.git/issues"
   },
-  "homepage": "https://github.com/Ksnow13/S3_FullStack_FinalSprint_Outline#readme",
+  "homepage": "https://github.com/kchafe84/FullStack_FinalSprint_Semester3.git#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "date-fns": "^2.29.3",
