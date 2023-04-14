@@ -113,7 +113,7 @@ app.use("/account", checkAuthenticated, accountRouter);
 //-----------------------------------------------------------------------------
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
-  res.render("login.ejs");
+  res.render("login.ejs", { message: req.flash("message") });
 });
 
 app.post(
@@ -145,6 +145,8 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
         hashedPassword,
         uuid.v4()
       );
+      if (DEBUG) console.log("User successfully registered: " + req.body.email);
+      req.flash("message", "Account Successfully created, please login !");
       res.redirect("/login");
     } catch (error) {
       console.log(error);
