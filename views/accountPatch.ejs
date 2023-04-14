@@ -1,0 +1,109 @@
+<html lang="en">
+    <%- include('./partials/header.ejs') %>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins&family=Roboto&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&family=Russo+One&display=swap");
+    
+        :root {
+          --shadow: 0 1px 7px rgba(105, 105, 105, 0.8);
+        }
+    
+        * {
+          margin: 0;
+          padding: 0;
+        }
+    
+        html {
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
+          color: black;
+        }
+    
+        body {
+          background-image: linear-gradient(to right, #e2dfdf, #647e74);
+          line-height: 1.5rem;
+        }
+    
+        .wrapper {
+          display: grid;
+          gap: 20px;
+        }
+    
+        /* Banner */
+    
+        .title {
+          font-size: 3rem;
+          color: white;
+        }
+    
+        .banner {
+          background-image: linear-gradient(to right, #4b9e85, #190a05);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 30px 50px;
+          font-family: "Russo One", sans-serif;
+        }
+    
+        .main-nav ul {
+          display: grid;
+    
+          gap: 30px;
+    
+          grid-template-columns: repeat(5, 1fr);
+          list-style-type: none;
+          padding: 0;
+        }
+    
+        .main-nav a {
+          display: block;
+          text-decoration: none;
+          text-align: center;
+          background-color: #598173;
+          color: white;
+          font-size: 1.2rem;
+          padding: 0.5rem;
+          box-shadow: var(--shadow);
+          text-transform: uppercase;
+        }
+    
+        .main-nav a:hover {
+          background-color: white;
+          color: black;
+        }
+    
+        @media (max-width: 970px) {
+          .banner {
+            display: grid;
+            text-align: center;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            padding: 30px 30px;
+          }
+          .main-nav ul {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            list-style-type: none;
+            padding: 0;
+          }
+        }
+      </style>
+    <body>
+        <%- include('./partials/banner.ejs') %>
+        <div class="edit-container">
+            <div class="form-container">
+                <form action="/account/<%= locals.theId %>?_method=PATCH" method="POST">
+                    <h1 class="form-container-title">What would you like your new username to be...</h1>
+                    <h3 class="input-username">enter username here</h3>
+                    <input class="theinput" type="text" name="username" value="<%= locals.username %>" required> <br>
+                    </br> <br>
+                    <button class="submit">PATCH</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    <%- include('./partials/logout.ejs') %>
+</html>

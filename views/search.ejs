@@ -1,0 +1,25 @@
+<html lang="en">
+    <%- include('./partials/header.ejs') %>
+    <body>
+        <%- include('./partials/banner.ejs') %>
+        <%- include('./partials/logout.ejs') %>
+        <div class="content">
+            <h3>Hello <%= name %>, a search bar should be here D: --- <%= email %> --- user login id:  <%= id %> </h3>
+        </div>
+        <form action="/search/results" method="GET">
+            <label>Search Engineeeeeee</label></br>
+            <label>
+                <input type="text" id="search" name="search" value="<%= locals.search %>" required>
+            </label>
+            <select name="db" id="db">
+                <option value="mongo">mongo</option>
+                <option value="postgres">postgres</option>
+                <option value="both">both</option>
+              </select>
+            <br>
+        </br>
+        <button>Search</button>
+        </br>
+        
+    </body>
+</html>
