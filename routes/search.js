@@ -1,8 +1,12 @@
+// Router for searching.
+
 const express = require("express");
 const router = express.Router();
 const searchesDal = require("../services/mongo.vehicles.dal");
 const historyDal = require("../services/postgres.userHistory.dal");
 const searchesFromPostgressDal = require("../services/postgres.vehicles.dal");
+
+// Home page for the search router.
 
 router.get("/", async (req, res) => {
   if (DEBUG) console.log("user: " + req.user.username + " used the search bar");
@@ -12,6 +16,8 @@ router.get("/", async (req, res) => {
     id: req.user._id,
   });
 });
+
+// Route to show all search results.
 
 router.get("/results", async (req, res) => {
   if (DEBUG) console.log("keyword searched: " + req.query.search);

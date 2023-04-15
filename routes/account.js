@@ -1,6 +1,10 @@
+// Router for user account info.
+
 const express = require("express");
 const router = express.Router();
 const accountDal = require("../services/postgres_logins.dal");
+
+// Homepage for the account router.
 
 router.get("/", async (req, res) => {
   try {
@@ -13,12 +17,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Router for the account patch page for users to update username. 
+
 router.get("/:id/edit", async (req, res) => {
   res.render("accountPatch.ejs", {
     username: req.query.username,
     theId: req.params.id,
   });
 });
+
+// Router.patch to change username.
 
 router.patch("/:id", async (req, res) => {
   try {
