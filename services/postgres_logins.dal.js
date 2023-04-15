@@ -1,4 +1,8 @@
+// Used to insert query statements to the postgres database & fetch data.
+
 const dal = require("./postgres_db");
+
+// Used to get all login data.
 
 async function getLogins() {
   let SQL = `SELECT id AS _id, username, password, email, uuid FROM public."login";`;
@@ -9,6 +13,9 @@ async function getLogins() {
     console.log(error);
   }
 }
+
+// Used to get login data by email.
+
 async function getLoginByEmail(email) {
   let SQL = `SELECT id AS _id, username, password, email, uuid FROM public."login" WHERE email = $1;`;
   try {
@@ -18,6 +25,9 @@ async function getLoginByEmail(email) {
     console.log(error);
   }
 }
+
+// Used to get login information by ID.
+
 async function getLoginById(id) {
   let SQL = `SELECT id AS _id, username, password, email, uuid FROM public."login" WHERE id = $1;`;
   try {
@@ -27,6 +37,9 @@ async function getLoginById(id) {
     console.log(error);
   }
 }
+
+// Used to add a new used to login database. 
+
 async function addLogin(name, email, password, uuidv4) {
   let SQL = `INSERT INTO public."login"(username, email, password, uuid) VALUES ($1, $2, $3, $4) RETURNING id;`;
   try {
@@ -36,6 +49,8 @@ async function addLogin(name, email, password, uuidv4) {
     console.log(error);
   }
 }
+
+// Used by the account router to fetch a users login data by login ID.
 
 async function getAccountById(id) {
   return new Promise(function (resolve, reject) {
@@ -50,6 +65,8 @@ async function getAccountById(id) {
     });
   });
 }
+
+// Used to update a users username.
 
 var patchAccount = function (id, username) {
   return new Promise(function (resolve, reject) {
