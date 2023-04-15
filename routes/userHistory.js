@@ -1,6 +1,10 @@
+// Router for user history.
+
 const express = require("express");
 const router = express.Router();
 const historyDal = require("../services/postgres.userHistory.dal");
+
+// Homepage for the history router, which displays all search history made by user logged in.
 
 router.get("/", async (req, res) => {
   try {
