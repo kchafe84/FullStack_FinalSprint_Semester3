@@ -1,15 +1,13 @@
+// Used to fetch data from used history.
+
 const dal = require("./postgres_db");
 
 const { format } = require("date-fns");
 const uuid = require("uuid");
 
-//const EventEmitter = require("events");
-
-//class MyEmitter extends EventEmitter {}
-
-//const myEmitter = new MyEmitter();
-
 const eventLogs = require("../eventLogger");
+
+// Used to get a users history by user ID.
 
 async function getHistoryByUserID(id) {
   return new Promise(function (resolve, reject) {
@@ -24,6 +22,8 @@ async function getHistoryByUserID(id) {
     });
   });
 }
+
+// Used to add all users search history to the history log. 
 
 async function addHistoryLog(
   userId,
