@@ -1,8 +1,12 @@
+// Getting the format function from date-fns package. 
+
 const { format } = require("date-fns");
 
 const fs = require("fs");
 const fsPromises = require("fs").promises;
 const path = require("path");
+
+// Function used to log all user searches to disc file.
 
 const eventLogs = async (
   userID,
