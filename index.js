@@ -10,6 +10,8 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+// Setting up npm packages.
+
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
@@ -20,6 +22,8 @@ const methodOverride = require("method-override");
 const uuid = require("uuid");
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Using epress.static to make css style sheet work across all views.
 
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
@@ -39,9 +43,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+// Getting functions from postgres_logins
+
 const logins = require("./services/postgres_logins.dal");
 
 global.DEBUG = true;
+
+// Using passport to verify logins from database.
 
 passport.use(
   new localStrategy(
@@ -68,9 +76,13 @@ passport.use(
   )
 );
 
+// Function to serialize user.
+
 passport.serializeUser((user, done) => {
   done(null, user._id);
 });
+
+// Fuction to deserialize user.
 
 passport.deserializeUser(async (id, done) => {
   let user = await logins.getLoginById(id);
@@ -89,9 +101,7 @@ passport.deserializeUser(async (id, done) => {
   done(null, user);
 });
 
-//------------------------------------------------------------------------------
-
-// routes
+// Setting up routes.
 
 app.get("/", checkAuthenticated, (req, res) => {
   res.render("home.ejs", {
@@ -101,20 +111,28 @@ app.get("/", checkAuthenticated, (req, res) => {
   });
 });
 
+// Making a router for search pages.
+
 const searchesRouter = require("./routes/search");
 app.use("/search", checkAuthenticated, searchesRouter);
+
+// Making a router for user history.
 
 const userHistoryRouter = require("./routes/userHistory");
 app.use("/userHistory", checkAuthenticated, userHistoryRouter);
 
+// Making a router for account information.
+
 const accountRouter = require("./routes/account");
 app.use("/account", checkAuthenticated, accountRouter);
 
-//-----------------------------------------------------------------------------
+// Making a route for logging in.
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login.ejs", { message: req.flash("message") });
 });
+
+// Used to verify login.
 
 app.post(
   "/login",
@@ -126,9 +144,13 @@ app.post(
   })
 );
 
+// Making a route for registering a user.
+
 app.get("/register", checkNotAuthenticated, (req, res) => {
   res.render("register.ejs", { message: req.flash("message") });
 });
+
+// Used to verify and register a user.
 
 app.post("/register", checkNotAuthenticated, async (req, res) => {
   let user = await logins.getLoginByEmail(req.body.email);
@@ -164,12 +186,16 @@ app.delete("/logout", function (req, res, next) {
   });
 });
 
+// Checks if a user is logged in or not, if not then redirects them to login page.
+
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect("/login");
 }
+
+// Checks if a user is logged in or not, if so then redirects them to the home page.
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -178,11 +204,11 @@ function checkNotAuthenticated(req, res, next) {
   return next();
 }
 
+// This code runs when the app runs on port 3000.
+
 app.listen(PORT, (err) => {
   if (err) console.log(err);
   console.log(`The app running on port ${PORT}.`);
   console.log(`Press Ctrl C to terminate...`);
   console.log("");
 });
-
-//-------------------------------------------------------------------------------
