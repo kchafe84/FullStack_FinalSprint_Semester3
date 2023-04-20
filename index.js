@@ -38,7 +38,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
@@ -46,6 +45,8 @@ app.use(methodOverride("_method"));
 // Getting functions from postgres_logins
 
 const logins = require("./services/postgres_logins.dal");
+
+// global variable for debugging
 
 global.DEBUG = true;
 
