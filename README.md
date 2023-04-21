@@ -21,3 +21,5 @@ PGPASSWORD= pg password goes here
 PGPORT=port goes here, usaully 5432
 
 PORT= backup port goes here 3000
+
+- Also after adding the json data to a mongo atlas database you must create a indexes for all the vehicle categories.
