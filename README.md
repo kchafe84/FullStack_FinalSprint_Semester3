@@ -1,6 +1,6 @@
 # S3_FullStack_FinalSprint_Outline
 
-Third semester software development - Full Stack final sprint - Rough solo copy
+Third semester software development - Full Stack final sprint 
 
 - Inorder to make this program work you must create a .env file to hold all your values for data base name / password etc...
 
