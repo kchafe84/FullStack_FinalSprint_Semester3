@@ -22,7 +22,7 @@
         }
     
         body {
-          background-image: linear-gradient(to right, #e2dfdf, #647e74);
+          background-image: linear-gradient(to right, #e2dfdf, #a496b1);
           line-height: 1.5rem;
         }
     
@@ -39,7 +39,7 @@
         }
     
         .banner {
-          background-image: linear-gradient(to right, #4b9e85, #190a05);
+          background-image: linear-gradient(to right, #6a458d, #190a05);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -61,7 +61,7 @@
           display: block;
           text-decoration: none;
           text-align: center;
-          background-color: #598173;
+          background-color: #6a458d;
           color: white;
           font-size: 1.2rem;
           padding: 0.5rem;
@@ -93,22 +93,41 @@
         .container{
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            margin-top: 3rem;
+            max-width: 1060px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px 50px;
+            text-align: center;
         }
+
+        .content {
+            margin-top: 3rem;
+            max-width: 1060px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px 50px;
+            text-align: center;
+          }
+          .results-box{
+            
+            border-radius: 20px;
+            margin-top: 1rem;
+            padding: 1rem;
+           
+          }
     </style>
     <body>
         <%- include('./partials/banner.ejs') %>
-        <%- include('./partials/logout.ejs') %>
         <div class="content">
-            <h3>Hello <%= name %> | Acount Info --- <%= email %> --- user login id:  <%= id %> </h3>
-            <hr>
-        </div>
         <h3>Results from <%= theDb %> </h3>
         <div class="container">
         <div class="mongo">
+       
         <form action="/results_pg_mongo" method="POST">
-            <h3>from mongo data base</h3>
-            <b>Results: [<%= theSearchesMongo.length %>] for keyword searched; "<%= search %>" </b></br> <br> <br> <br>
-            
+            <h3>from mongo data base</h3> <br> 
+            <b>Results: [<%= theSearchesMongo.length %>] for keyword searched; "<%= search %>" </b></br> <br>
+            <div class="results-box">
             <% if (theSearchesMongo.length > 0) { %>
                 <% theSearchesMongo.forEach(search => { %>
                     <b> - <%= search.year %> <%= search.brand %> <%= search.model %> <%= search.cost %></b> <br>
@@ -118,12 +137,12 @@
                     
                     <% }) %>
             <% } %>
-        </br>
+          </div>
         </div>
         <div class="postgres">
-            <h3>from postgres data base</h3>
-            <b>Results: [<%= theSearchesPG.length %>] for keyword searched; "<%= search %>" </b></br> <br> <br> <br>
-            
+            <h3>from postgres data base</h3> <br>
+            <b>Results: [<%= theSearchesPG.length %>] for keyword searched; "<%= search %>" </b></br> <br>
+            <div class="results-box">
             <% if (theSearchesPG.length > 0) { %>
                 <% theSearchesPG.forEach(search => { %>
                     <b> - <%= search.year %> <%= search.brand %> <%= search.model %> <%= search.cost %></b> <br>
@@ -133,7 +152,10 @@
                     
                     <% }) %>
             <% } %>
+          </div>
         </div>
+      
     </div>
+  </div>
     </body>
 </html>
