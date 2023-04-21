@@ -6,7 +6,7 @@ Third semester software development - Full Stack final sprint - Rough solo copy
 
 example;
 
-SESSION_SECRET=session secret
+SESSION_SECRET=AdmiralsCove
 
 MONGODB=mongo db link goes here
 
